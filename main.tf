@@ -1,3 +1,11 @@
+provider "aws" {
+  region = var.region
+}
+
+terraform {
+  required_version = ">= 0.12"
+}
+
 resource "aws_instance" "node" {
   ami                    = data.aws_ami.aws_x86_64.id
   instance_type          = var.instance_type
