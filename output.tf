@@ -1,4 +1,4 @@
 output "node" {
-  value = "${ var.hostname } : ${ aws_eip.node.public_ip } (${ aws_eip.node.public_dns })"
+  value = "${ var.hostname } : ${ aws_instance.node.public_ip } (${ aws_instance.node.public_dns })"
 }
 

@@ -1,11 +1,3 @@
-resource "aws_key_pair" "deployer" {
-  key_name = "${var.localuser}-core-deployer-key"
-  public_key = file(var.keys["public"])
-  tags = {
-    Owner = "gaia"
-  }
-}
-
 resource "aws_security_group" "ssh_node" {
   name = "ssh-node"
   ingress {

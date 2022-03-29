@@ -7,10 +7,10 @@ terraform {
 }
 
 resource "aws_instance" "node" {
-  ami                    = data.aws_ami.aws_x86_64.id
+  ami                    = data.aws_ami.x86_64.id
   instance_type          = var.instance_type
   vpc_security_group_ids = ["ssh_node"]
-  key_name               = var.keys.key_name
+#  key_name               = var.keys.key_name
   monitoring             = true
   availability_zone      = "eu-central-1a"
 
@@ -31,8 +31,8 @@ resource "aws_instance" "node" {
 
 resource "aws_route53_record" "core_infra" {
   zone_id = "Z08669212W005E4G61IF8"
-  name    = "${ local.hostname }.testing.infra.eessi-hpc.org"
+  name    = "${ var.hostname }.testing.infra.eessi-hpc.org"
   type    = "A"
   ttl     = "300"
-  records = [aws_eip.node.public_ip]
+  records = [aws_instance.node.public_ip]
 }
