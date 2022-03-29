@@ -1,5 +1,5 @@
 provider "aws" {
-  region = var.region
+  region = "eu-central-1"
 }
 
 terraform {
@@ -12,7 +12,7 @@ resource "aws_instance" "node" {
   vpc_security_group_ids = ["ssh_node"]
   key_name               = var.keys.key_name
   monitoring             = true
-  availability_zone      = local.availability_zone
+  availability_zone      = "eu-central-1a"
 
   root_block_device {
     volume_size = 20
@@ -30,8 +30,8 @@ resource "aws_instance" "node" {
 }
 
 resource "aws_route53_record" "core_infra" {
-  zone_id = var.aws_route53_infra_hpc_zoneid
-  name    = "${ local.hostname }.infra.eessi-hpc.org"
+  zone_id = "Z08669212W005E4G61IF8"
+  name    = "${ local.hostname }.testing.infra.eessi-hpc.org"
   type    = "A"
   ttl     = "300"
   records = [aws_eip.node.public_ip]
